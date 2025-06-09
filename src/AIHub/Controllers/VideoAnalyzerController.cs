@@ -148,7 +148,7 @@ public class VideoAnalyzerController : Controller
         }
         var payload = new
         {
-            model = "gpt-4-vision-preview",
+            model = "gpt-4o",
             dataSources = new[]
             {
                 new

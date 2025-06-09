@@ -51,8 +51,8 @@ rm -rf "$AIHubRoot/home"
 echo "Clean up $zipFilePath..."
 rm $zipFilePath
 
-zipFilePath="terraform_1.7.4_linux_386.zip" 
-zipFileUrl="https://releases.hashicorp.com/terraform/1.7.4/$zipFilePath"
+zipFilePath="terraform_1.12.1_linux_386.zip" # if running script locally, use terraform_1.12.1_linux_amd64.zip
+zipFileUrl="https://releases.hashicorp.com/terraform/1.12.1/$zipFilePath"
 echo "Downloading $zipFileUrl ..."
 curl -L $zipFileUrl --output $zipFilePath
 
@@ -71,6 +71,10 @@ export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 # Use Terraform to deploy AI Hub
 echo "Deploying AI Hub..."
 cd $AIHubRoot
+
+# T.S. added since not executable by default (but won't work if running locally in win; in that case either manually run your windows installed `terraform` or run in linux/wsl environment
+chmod +x ./terraform
+
 ./terraform init 
 ./terraform apply -auto-approve
 cd -
